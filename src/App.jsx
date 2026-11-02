@@ -61,6 +61,9 @@ export default function App() {
         playsInline
       />
 
+      {/* Overlay message that gently fades in and out */}
+      <p className="fade-message">Tu me manques mon potit chat</p>
+
       {/* Hidden Spotify player; audio only, controlled by clicking the screen */}
       <div className="music-dock" aria-hidden="true">
         <SpotifyPlayer
