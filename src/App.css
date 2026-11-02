@@ -18,3 +18,16 @@
   object-fit: cover;
   display: block;
 }
+
+/* Hidden Spotify player: kept in the corner but invisible and non-interactive
+   so screen clicks pass through to the toggle handler. Stays in the DOM (never
+   display:none) so audio keeps playing. */
+.music-dock {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  width: 300px;
+  opacity: 0;
+  pointer-events: none;
+}

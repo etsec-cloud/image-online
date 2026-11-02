@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import SpotifyPlayer from "./SpotifyPlayer.jsx";
 import "./App.css";
 
 const LANDSCAPE_SRC = "/assets/landscape.mp4";
 const PORTRAIT_SRC = "/assets/portrait.mp4";
+const SPOTIFY_TRACK_ID = "2JXrRgRYoqyqGoxEikPg2I";
 
 // Returns true when the viewport is wider than it is tall.
 function getIsLandscape() {
@@ -12,6 +14,7 @@ function getIsLandscape() {
 
 export default function App() {
   const [isLandscape, setIsLandscape] = useState(getIsLandscape);
+  const controllerRef = useRef(null);
 
   useEffect(() => {
     const query = window.matchMedia("(orientation: landscape)");
@@ -33,10 +36,20 @@ export default function App() {
     };
   }, []);
 
+  const handleControllerReady = useCallback((controller) => {
+    controllerRef.current = controller;
+  }, []);
+
+  // Clicking anywhere toggles the music. The first click is the user gesture
+  // the browser requires to start audio; later clicks pause/resume it.
+  const handleScreenClick = useCallback(() => {
+    controllerRef.current?.togglePlay();
+  }, []);
+
   const src = isLandscape ? LANDSCAPE_SRC : PORTRAIT_SRC;
 
   return (
-    <div className="stage">
+    <div className="stage" onClick={handleScreenClick}>
       {/* key forces a remount so the correct video loads and autoplays on orientation change */}
       <video
         key={src}
@@ -47,6 +60,14 @@ export default function App() {
         muted
         playsInline
       />
+
+      {/* Hidden Spotify player; audio only, controlled by clicking the screen */}
+      <div className="music-dock" aria-hidden="true">
+        <SpotifyPlayer
+          trackId={SPOTIFY_TRACK_ID}
+          onControllerReady={handleControllerReady}
+        />
+      </div>
     </div>
   );
 }
