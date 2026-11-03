@@ -62,7 +62,7 @@ export default function App() {
       />
 
       {/* Overlay message that gently fades in and out */}
-      <p className="fade-message">Dors bien mon amour</p>
+      <p className="fade-message">Bonjour mon chat ! Plus que 2 dodos </p>
 
       {/* Hidden Spotify player; audio only, controlled by clicking the screen */}
       <div className="music-dock" aria-hidden="true">
