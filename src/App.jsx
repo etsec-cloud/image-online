@@ -4,7 +4,7 @@ import "./App.css";
 
 const LANDSCAPE_SRC = "/assets/landscape.mp4";
 const PORTRAIT_SRC = "/assets/portrait.mp4";
-const SPOTIFY_TRACK_ID = "4lTux6velSRhPQ9MWR1Lfm";
+const SPOTIFY_TRACK_ID = "2KUtgRHdkBZfXWdd0Xw0QU";
 
 // Returns true when the viewport is wider than it is tall.
 function getIsLandscape() {
